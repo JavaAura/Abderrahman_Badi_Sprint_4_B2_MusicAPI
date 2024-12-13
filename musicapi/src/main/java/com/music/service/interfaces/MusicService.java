@@ -16,9 +16,9 @@ public interface MusicService {
 
    MusicDTO getMusicById(String id, String... with);
 
-   Page<MusicDTO> getAllMusics(Pageable pageable, String search, Long albumId);
+   Page<MusicDTO> getAllMusics(Pageable pageable, String search, String albumId);
 
-   Page<MusicDTO> getAllMusics(Pageable pageable, String search, Long albumId, String... with);
+   Page<MusicDTO> getAllMusics(Pageable pageable, String search, String albumId, String... with);
 
    Page<MusicDTO> getAllAlbumMusics(Pageable pageable, String id);
 

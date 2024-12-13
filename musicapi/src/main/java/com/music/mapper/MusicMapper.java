@@ -64,11 +64,13 @@ public class MusicMapper {
 
         if (includesList.contains("album")) {
             Album album = music.getAlbum();
-            albumDTO = AlbumDTO.builder()
-                    .title(album.getTitle())
-                    .artist(album.getArtist())
-                    .year(album.getYear())
-                    .build();
+            if(album != null){
+                albumDTO = AlbumDTO.builder()
+                        .title(album.getTitle())
+                        .artist(album.getArtist())
+                        .year(album.getYear())
+                        .build();
+            }
         }
 
         return MusicDTO.builder()

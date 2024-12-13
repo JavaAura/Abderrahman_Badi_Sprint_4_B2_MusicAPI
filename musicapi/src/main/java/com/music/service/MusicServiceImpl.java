@@ -54,7 +54,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Page<MusicDTO> getAllMusics(Pageable pageable, String title, Long albumId) {
+    public Page<MusicDTO> getAllMusics(Pageable pageable, String title, String albumId) {
         Query query = new Query();
 
         if (title != null && !title.isEmpty()) {
@@ -77,7 +77,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Page<MusicDTO> getAllMusics(Pageable pageable, String title, Long albumId, String... with) {
+    public Page<MusicDTO> getAllMusics(Pageable pageable, String title, String albumId, String... with) {
 
         musicMapper.verifyIncludes(with);
 

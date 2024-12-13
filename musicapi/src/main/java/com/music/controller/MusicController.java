@@ -31,9 +31,9 @@ public class MusicController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(required = false) String title,
-            @RequestParam(required = false) Long albumId) {
+            @RequestParam(required = false) String albumId) {
         Pageable pageable = PageRequest.of((page - 1), size, Sort.by("ID").ascending());
-        return musicService.getAllMusics(pageable, title, albumId);
+        return musicService.getAllMusics(pageable, title, albumId, "album");
     }
 
     @GetMapping("/album/{id}")

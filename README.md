@@ -15,18 +15,18 @@ A REST API for managing products, categories, and user roles in a secure and sca
 
 **Context**:  
 
-The Music API provides functionality for managing products, categories, and users with role-based access control. It is designed for e-commerce systems where administrators manage the catalog and users interact with products.
+The Music API provides functionality for managing musics, alubms, and users with role-based access control. It is designed for platforms where administrators manage the catalog of music and albums.
 
 
 **Objectives**:
 
-- Build a secure REST API with session-based authentication using Spring Security.
+- Build a secure REST API with JWT token based authentication using Spring Security.
 - Implement role-based access control with distinct ADMIN and USER roles.
-- Enable CRUD operations for products, categories, and users.
+- Enable CRUD operations for musics, albums, and users.
 - Provide efficient pagination, sorting, and filtering for product and category data.
 - Handle security, validation, and exceptions robustly.
 - Use Docker and Jenkins for deployment workflows.
-
+- Use of a No sql database, MongoDB in this case.
 
 ## Installation
 
@@ -34,7 +34,7 @@ The Music API provides functionality for managing products, categories, and user
 
 - Java 8 or higher
 - Apache Maven
-- MySQL Server
+- MongoDB local service or atlas (cloud)
 
 ### Steps
 
@@ -58,10 +58,10 @@ The Music API provides functionality for managing products, categories, and user
 ## Structure
 
 - **Entities**:  
-  Defines JPA entities such as `User`, `Product`, and `Category`, and their relationships (e.g., many-to-one or many-to-many).
+  Defines JPA entities such as `User`, `Music`, and `Album`, and their relationships (e.g., many-to-one or many-to-many).
 
 - **Repository Layer**:  
-  Extend `JpaRepository` for data access and include custom query methods.
+  Extend `MongoRepository` for data access and include custom query methods.
 
 - **Service Layer**:  
   Contains business logic and orchestrates operations between the Controller and Repository layers.
@@ -84,37 +84,32 @@ The Music API provides functionality for managing products, categories, and user
    - Role-based access (ADMIN, USER).
    - Admins can manage users, including assigning roles.
 
-2. **Product Management**:
-   - List of products with pagination, sorting, and filtering accessible by both ADMIN and USER roles.
+2. **Music Management**:
+   - List of musics with pagination, sorting, and filtering accessible by both ADMIN and USER roles.
    - Admin-only access for creating, updating, and deleting products.
 
-3. **Category Management**:
-   - Manage product categories with hierarchical relationships.
+3. **Album Management**:
+   - Manage albums with hierarchical relationships.
    - Admin-only access for creating, updating, and deleting categories.
 
 4. **Security**:
-   - Session-based authentication using Spring Security and MariaDB.
+   - JWT authentication using Spring Security and MongoDB.
    - Prevents unauthorized access to protected resources.
 
 5. **Deployment**:
    - Docker: The application can be containerized using Docker for easy deployment.
    - Jenkins: CI/CD pipelines for automated builds, tests, and deployments.
-   - Kubernetes: Orchestrates containerized applications for scaling, load balancing, and managing deployments in clusters.
-
 
 ## Technologies
 
 - **Java 8**: Core language used for development.
 - **Apache Maven**: For dependency management and project build.
 - **Spring Boot**: For creating the REST API and managing application configuration.
-- **Spring Data JPA**: For database interactions and repository management.
+- **Spring Data MongoDB**: For database interactions and repository management.
 - **Spring Security**: Secures the application with session-based authentication.
-- **MySQL**: Relational database for production.
-- **H2 Database**: In-memory database for development.
-- **Hibernate**: ORM for database access and management.
+- **MongoDB**: No relational database for production.
 - **JUnit**: For unit testing.
 - **Mockito**: For mocking and testing services.
 - **Lombok**: For reducing boilerplate code.
 - **Docker**: For containerized deployment.
 - **Jenkins**: For CI/CD pipeline management.
-- **Kubernetes**: For managing and orchestrating containerized applications.
