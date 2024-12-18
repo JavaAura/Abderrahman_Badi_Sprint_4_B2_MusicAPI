@@ -32,6 +32,7 @@ public class JWTGenerator {
         String token = Jwts.builder().subject(username).issuedAt(currentDate).expiration(expiryDate)
                 .signWith(securityConstants.getSigningKey(), alg).compact();
 
+                
         return token;
     }
 

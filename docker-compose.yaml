@@ -1,41 +1,37 @@
 services:
-  shopapi:
-    build:
-      dockerfile: Dockerfile
-    container_name: shopapi-container
+  musicapi:
+    image: yorften/musicapi
     ports:
       - "8085:8085"  
     environment:
       SPRING_PROFILES_ACTIVE: prod 
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/shopapi
-      SPRING_DATASOURCE_USERNAME: shopapi
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      SPRING_DDL_AUTO: validate
+      SPRING_JWT_TOKEN: ${JWT_TOKEN}
+      SPRING_JWT_EXPIRATION: ${JWT_EXPIRATION}
+      SPRING_MONGODB_URI: ${MONGODB_URI}
     depends_on:
       - db
     networks:
-      - shopapi-network
+      - musicapi-network
 
   db:
-    image: mysql:latest
-    volumes:
-      - mysql-data:/var/lib/mysql
-    container_name: mysql-db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: shopapi
-      MYSQL_USER: shopapi
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+    image: mongodb:latest
+    container_name: mongodb-container
     ports:
-      - "3306:3306"
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
     networks:
-      - shopapi-network
+      - musicapi-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     command:
-      --bind-address=0.0.0.0
-  
+      --bind_ip_all # Allows MongoDB to bind to all IPs inside the network
+
 volumes:
-  mysql-data:
+  mongo-data:
+    driver: local
 
 networks:
-  shopapi-network:
+  musicapi-network:
     driver: bridge

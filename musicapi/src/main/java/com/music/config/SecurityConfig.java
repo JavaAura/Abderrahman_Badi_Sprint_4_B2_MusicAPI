@@ -17,7 +17,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import com.music.service.CustomUserDetailsServiceImpl;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfig {
 
     private JWTAuthEntryPoint authEntryPoint;
@@ -41,7 +41,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .formLogin(login -> login.disable())
                 .authorizeRequests(authorizeRequests -> authorizeRequests

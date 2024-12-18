@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -27,8 +25,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Document(collection = "users")
-@Where(clause = "removed_at IS NULL")
-@SQLDelete(sql = "UPDATE users SET removed_at = CURRENT_TIMESTAMP WHERE id=?")
 public class User {
 
     @Id
